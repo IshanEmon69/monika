@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Is For You</title>
+    <style>
+        body {
+            background-color: #ffd6e7; /* Light pink love theme background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .heart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .heart {
+            width: 200px;
+            height: 180px;
+            background-color: red;
+            position: relative;
+            transform: rotate(-45deg);
+            transition: all 0.6s ease;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: "";
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart:before {
+            top: -100px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 100px;
+            top: 0;
+        }
+
+        .heart-container.clicked .heart {
+            transform: scale(0); /* Shrink the heart to simulate a burst effect */
+        }
+
+        .message {
+            display: none;
+            color: #ff0055;
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            position: absolute;
+            z-index: 1;
+            animation: appear 0.6s forwards;
+        }
+
+        .heart-container.clicked .message {
+            display: block;
+        }
+
+        @keyframes appear {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Floating hearts background effect */
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .floating-hearts i {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #ff66b2;
+            animation: float 5s linear infinite;
+            bottom: -10%;
+            border-radius: 50%;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Randomized heart positions */
+        .floating-hearts i:nth-child(1) { left: 20%; width: 20px; height: 20px; animation-delay: 0s; }
+        .floating-hearts i:nth-child(2) { left: 50%; width: 25px; height: 25px; animation-delay: 2s; }
+        .floating-hearts i:nth-child(3) { left: 80%; width: 18px; height: 18px; animation-delay: 4s; }
+        .floating-hearts i:nth-child(4) { left: 10%; width: 22px; height: 22px; animation-delay: 1s; }
+        .floating-hearts i:nth-child(5) { left: 70%; width: 17px; height: 17px; animation-delay: 3s; }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Background Effect -->
+    <div class="floating-hearts">
+        <i></i><i></i><i></i><i></i><i></i>
+    </div>
+
+    <div class="heart-container" id="heartContainer">
+        <!-- Heart Element -->
+        <div class="heart"></div>
+        <!-- Message to be revealed on click -->
+        <div class="message">You're the Most Pretty Person, Monika</div>
+    </div>
+
+    <script>
+        const heartContainer = document.getElementById('heartContainer');
+        heartContainer.addEventListener('click', function() {
+            this.classList.add('clicked'); // Add class to trigger burst effect
+        });
+    </script>
+</body>
+</html>
